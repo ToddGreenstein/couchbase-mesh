@@ -1,0 +1,34 @@
+{
+    "couchbase": {
+        "endPoint": ":8091",
+        "n1qlService": ":8093",
+        "ftsService": "127.0.0.1:8094",
+        "hostName": "127.0.0.1",
+        "bucket": "default",
+        "user": "Administrator",
+        "password": "password",
+        "dataPath": "",
+        "indexPath": "",
+        "indexerStorageMode":"memory_optimized",
+        "showQuery": false,
+        "indexMemQuota": 1024,
+        "dataMemQuota": 1024,
+        "ftsMemoryQuota":"0",
+        "bucketType":"membase",
+        "flushEnabled":1,
+        "evictionPolicy":"valueOnly",
+        "conflictResolutionType":"seqno",
+        "authType":"sasl",
+        "replicaIndex":0,
+        "replicaNumber":0,
+        "threadsNumber":3
+    },
+    "application": {
+        "thresholdItemCount": 2500,
+        "opsGroup": 1000,
+        "autoprovision": true,
+        "connectionstring": "couchbase://cbdb",
+        "wait": 3000,
+        "checkInterval": 1000
+    }
+}
