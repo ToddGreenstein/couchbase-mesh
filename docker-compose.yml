@@ -2,28 +2,44 @@ version: '3'
 
 services:
     cbdb1:
-        image: couchbase/server:4.6.1
+        image: couchbase/server:4.6.2
         ports:
             - "8091-8094:8091-8094"
             - "11207-11210:11207-11210"
             - "18091-18094:18091-18094"
+        volumes:
+            - ~/couchbase-mesh/node1:/opt/couchbase/var
     cbdb2:
-        image: couchbase/server:4.6.1
+        image: couchbase/server:4.6.2
         ports:
             - "9091-9094:8091-8094"
+        volumes:
+            - ~/couchbase-mesh/node2:/opt/couchbase/var
     cbdb3:
-        image: couchbase/server:4.6.1
+        image: couchbase/server:4.6.2
         ports:
             - "10091-10094:8091-8094"
+        volumes:
+            - ~/couchbase-mesh/node3:/opt/couchbase/var
     cbdb4:
-        image: couchbase/server:4.6.1
+        image: couchbase/server:4.6.2
         ports:
             - "11091-11094:8091-8094"
+        volumes:
+            - ~/couchbase-mesh/node4:/opt/couchbase/var
     cbdb5:
-        image: couchbase/server:4.6.1
+        image: couchbase/server:4.6.2
         ports:
             - "12091-12094:8091-8094"
+        volumes:
+            - ~/couchbase-mesh/node5:/opt/couchbase/var
     nodejs:
         build:
           context: .
           dockerfile: Dockerfile-Node-App
+    setrack:
+        build:
+          context: .
+          dockerfile: Dockerfile-GO-App
+        ports:
+            - "8000:8000"

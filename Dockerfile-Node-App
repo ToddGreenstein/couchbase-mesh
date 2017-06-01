@@ -1,6 +1,6 @@
 
 #Choose a base image
-FROM node:6.10
+FROM node:6.10.3-alpine
 
 # Create a new folder for our application
 RUN mkdir -p /usr/src/app
@@ -10,6 +10,8 @@ WORKDIR /usr/src/app
 
 # Copy our package.json file
 ADD package.json /usr/src/app
+
+RUN apk add --no-cache make gcc g++ python
 
 # Install our packages
 RUN npm install

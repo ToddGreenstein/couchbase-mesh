@@ -42,6 +42,7 @@ class cluster {
         locals.replicaIndex = config.couchbase.replicaIndex;
         locals.replicaNumber = config.couchbase.replicaNumber;
         locals.threadsNumber = config.couchbase.threadsNumber;
+        locals.clusterServices = config.couchbase.clusterServices;
         this._locals = locals;
     }
 
@@ -174,7 +175,7 @@ class cluster {
         return new Promise(
             (resolve, reject) => {
                 var data = {
-                    services:'kv,n1ql,index'
+                    services:locals.clusterServices
                 };
 
                 if (locals.ftsMemQuota != "0" && locals.instanceVersion>=4.5) data["services"] += ",fts";
@@ -340,6 +341,10 @@ class cluster {
     _bucketResponding() {
         return new Promise(
             (resolve, reject)=> {
+              if(this.locals.clusterServices=='kv'){
+                resolve(true);
+              }
+              else{
                 var data = {
                     statement:"select count(*) from default"
                 };
@@ -363,6 +368,7 @@ class cluster {
                         resolve(false);
                     }
                 });
+              }
             });
     }
 
@@ -380,7 +386,7 @@ class cluster {
                 if (err) {
                     resolve(false);
                 }
-                if (JSON.parse(body).nodesExt[0].services.n1ql==8093) {
+                if ((JSON.parse(body).nodesExt[0].services.n1ql==8093)||(this.locals.clusterServices=='kv')) {
                     resolve(true);
                 }
                 else{

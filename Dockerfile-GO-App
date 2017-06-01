@@ -1,0 +1,5 @@
+
+FROM scratch
+COPY ./setrack/setrack /app/
+EXPOSE 8000
+CMD ["/app/setrack"]
