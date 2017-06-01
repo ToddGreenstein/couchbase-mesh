@@ -1,5 +1,7 @@
 # couchbase-mesh
-Couchbase fully meshed XDCR 5 cluster environment using docker-compose
+Couchbase fully meshed XDCR 5 cluster environment using docker-compose.  Includes a
+- **nodejs utility** for provisioning
+- **go application: setrack** for load generation (precompiled for linux)
 
 ## REQUIREMENTS
 - **Clone this repo**   
@@ -7,7 +9,11 @@ Couchbase fully meshed XDCR 5 cluster environment using docker-compose
 - **To run and build in one command**   
 docker-compose up --build -d   
 - **To fully mesh the XDCR Network**   
-./curl.sh
+./curl.sh   
+- **To add some user profile data (this will execute against cbdb5)**   
+curl -X POST http://localhost:8000/api/users/gen   
+- **To add 1000 activities (this will execute against cbdb5)**   
+curl -X POST http://localhost:8000/api/activity/gen/1/1000
 
 ## TOPOLOGY
 Refer to docker-compose.yml for cluster (service) names and host ports
